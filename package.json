@@ -1,0 +1,22 @@
+{
+  "name": "Gamepro",
+  "version": "0.0.0-SNAPSHOT",
+  "description": "#gamepro calc IRC bot",
+  "main": "gamepro.coffee",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GameproCrowd/Gamepro.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GameproCrowd/Gamepro/issues"
+  },
+  "homepage": "https://github.com/GameproCrowd/Gamepro",
+  "dependencies": {
+    "coffee-script": "^1.7.1"
+  }
+}
