@@ -59,4 +59,10 @@ describe 'Message', () ->
 
     it 'should parse params', () ->
       expect(Message.parse(':nickname!~user@host.com PRIVMSG me :hello world!').params).
-        toBe 'me :hello world!'
+        toEqual ['me']
+
+
+    it 'should parse message body', () ->
+      expect(Message.parse(':nickname!~user@host.com PRIVMSG me :hello world!').text).
+        toBe 'hello world!'
+

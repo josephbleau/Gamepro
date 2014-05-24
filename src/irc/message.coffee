@@ -3,7 +3,7 @@ log = debug 'MessageParser'
 net = require 'net'
 _ = require 'lodash'
 
-MESSAGE_REGEXP = /^(?:\:([^ ]+)\ +)?([^ ]+)(?: +(.*))?$/;
+MESSAGE_REGEXP = /^(?:\:([^ ]+)\ +)?([^\ ]+(?:\s+(?:\s*[^\ \:]+)+))(?:\s*\:(.+))?$/
 
 HOST_REGEXP   = /^[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9-]*)+/
 USER_BASIC_REGEXP = /^([^\!]+)(?:\!([^@]+)(?:\@([^\s\r\n]+))?)?$/
@@ -93,9 +93,11 @@ class Message
       match = MESSAGE_REGEXP.exec message
 
       if match?
+        command = (match[2] or '').split /\s+/;
         msg.prefix = match[1] if match[1]?
-        msg.command = match[2]
-        msg.params = match[3]
+        msg.command = command.shift();
+        msg.params = command;
+        msg.text = match[3];
 
         match = parsePrefix msg.prefix
         if match?
@@ -114,6 +116,7 @@ class Message
   nick: null
   user: null
   host: null
+  text: null
   raw: ''
 
 module.exports =
