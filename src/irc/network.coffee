@@ -17,7 +17,7 @@ class Network
     socket = @socket
     promise = new @factory.Promise (resolve, reject) ->
       onconnect = (reason) ->
-        log "connection success: #{reason}"
+        log "connection success: #{reason or ':)'}"
 
       onerror = (reason) ->
         log "connection failed: #{reason}"
