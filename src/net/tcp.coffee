@@ -60,3 +60,6 @@ class TCPFactory
 
   socket: (port, host) ->
     new TCPSocket(@, host, port)
+
+module.exports =
+  'TCP': ['type', TCPFactory]

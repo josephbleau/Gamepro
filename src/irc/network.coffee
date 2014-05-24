@@ -23,4 +23,4 @@ class NetworkFactory
   create (host, port) -> new Network(@, user, host, port)
 
 module.exports =
-  'Network': ['type', 'Network', NetworkFactory]
+  'Network': ['type', NetworkFactory]
