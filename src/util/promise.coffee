@@ -9,4 +9,4 @@ if process.execArgv.indexOf '--harmony' < 0 and Promise
 Promise = Promise || (require 'es6-promise').Promise
 
 module.exports =
-  'Promise': ['value', 'Promise', Promise]
+  'Promise': ['value', Promise]
