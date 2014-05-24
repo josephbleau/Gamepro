@@ -5,22 +5,32 @@ class Network
   constructor: (@factory, @user, @host, @port) ->
     @socket = @factory.TCP.socket @host, @port
 
+  on: (event, listener) ->
+    @socket.on arguments...
+    @
+
+  off: (event, listener) ->
+    @socket.off  arguments...
+    @
+
   connect: () ->
-    onconnect = (reason) ->
-      log 'connection success: #{reason}'
+    socket = @socket
+    promise = new @factory.Promise (resolve, reject) ->
+      onconnect = (reason) ->
+        log "connection success: #{reason}"
 
-    onerror = (reason) ->
-      log 'connection failed: #{reason}'
+      onerror = (reason) ->
+        log "connection failed: #{reason}"
 
-    promise = @factory.Promise (resolve, reject) ->
-      @socket.connect().then onconnect, onerror
+      log "connecting to #{socket}..."
+      socket.connect().then onconnect, onerror
 
 class NetworkFactory
   @$inject: ['Promise', 'TCP']
 
   constructor: (@Promise, @TCP) ->
 
-  create (host, port) -> new Network(@, user, host, port)
+  create: (host, port) -> new Network(@, {}, host, port)
 
 module.exports =
   'Network': ['type', NetworkFactory]
